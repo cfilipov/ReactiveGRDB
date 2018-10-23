@@ -71,59 +71,59 @@ ifeq ($(TRAVIS),true)
   COCOAPODS_EXTRA_TIME = --verbose
 endif
 
-# We test framework test suites, and if RxGRBD can be installed in an application:
+# We test framework test suites, and if ReactiveGRDB can be installed in an application:
 test: test_framework test_install
 
-test_framework: test_framework_RxGRDB
-test_framework_RxGRDB: test_framework_RxGRDBmacOS test_framework_RxGRDBiOS
-test_framework_RxGRDBiOS: test_framework_RxGRDBiOS_minTarget test_framework_RxGRDBiOS_maxTarget
+test_framework: test_framework_ReactiveGRDB
+test_framework_ReactiveGRDB: test_framework_ReactiveGRDBmacOS test_framework_ReactiveGRDBiOS
+test_framework_ReactiveGRDBiOS: test_framework_ReactiveGRDBiOS_minTarget test_framework_ReactiveGRDBiOS_maxTarget
 test_install: test_CocoaPodsLint
 
-test_framework_RxGRDBmacOS: test_framework_RxGRDBmacOS_maxSwift test_framework_RxGRDBmacOS_minSwift
+test_framework_ReactiveGRDBmacOS: test_framework_ReactiveGRDBmacOS_maxSwift test_framework_ReactiveGRDBmacOS_minSwift
 
-test_framework_RxGRDBmacOS_maxSwift: Pods
+test_framework_ReactiveGRDBmacOS_maxSwift: Pods
 	$(XCODEBUILD) \
-	  -workspace RxGRDB.xcworkspace \
-	  -scheme RxGRDBmacOS \
+	  -workspace ReactiveGRDB.xcworkspace \
+	  -scheme ReactiveGRDBmacOS \
 	  SWIFT_VERSION=$(MAX_SWIFT_VERSION) \
 	  $(TEST_ACTIONS) \
 	  $(XCPRETTY)
 
-test_framework_RxGRDBmacOS_minSwift: Pods
+test_framework_ReactiveGRDBmacOS_minSwift: Pods
 ifdef MIN_SWIFT_VERSION
 	$(XCODEBUILD) \
-	  -workspace RxGRDB.xcworkspace \
-	  -scheme RxGRDBmacOS \
+	  -workspace ReactiveGRDB.xcworkspace \
+	  -scheme ReactiveGRDBmacOS \
 	  SWIFT_VERSION=$(MIN_SWIFT_VERSION) \
 	  $(TEST_ACTIONS) \
 	  $(XCPRETTY)
 endif
 
-test_framework_RxGRDBiOS_minTarget: Pods
+test_framework_ReactiveGRDBiOS_minTarget: Pods
 	$(XCODEBUILD) \
-	  -workspace RxGRDB.xcworkspace \
-	  -scheme RxGRDBiOS \
+	  -workspace ReactiveGRDB.xcworkspace \
+	  -scheme ReactiveGRDBiOS \
 	  -destination $(MIN_IOS_DESTINATION) \
 	  SWIFT_VERSION=$(MAX_SWIFT_VERSION) \
 	  $(TEST_ACTIONS) \
 	  $(XCPRETTY)
 
-test_framework_RxGRDBiOS_maxTarget: test_framework_RxGRDBiOS_maxTarget_maxSwift test_framework_RxGRDBiOS_maxTarget_minSwift
+test_framework_ReactiveGRDBiOS_maxTarget: test_framework_ReactiveGRDBiOS_maxTarget_maxSwift test_framework_ReactiveGRDBiOS_maxTarget_minSwift
 
-test_framework_RxGRDBiOS_maxTarget_maxSwift: Pods
+test_framework_ReactiveGRDBiOS_maxTarget_maxSwift: Pods
 	$(XCODEBUILD) \
-	  -workspace RxGRDB.xcworkspace \
-	  -scheme RxGRDBiOS \
+	  -workspace ReactiveGRDB.xcworkspace \
+	  -scheme ReactiveGRDBiOS \
 	  -destination $(MAX_IOS_DESTINATION) \
 	  SWIFT_VERSION=$(MAX_SWIFT_VERSION) \
 	  $(TEST_ACTIONS) \
 	  $(XCPRETTY)
 
-test_framework_RxGRDBiOS_maxTarget_minSwift: Pods
+test_framework_ReactiveGRDBiOS_maxTarget_minSwift: Pods
 ifdef MIN_SWIFT_VERSION
 	$(XCODEBUILD) \
-	  -workspace RxGRDB.xcworkspace \
-	  -scheme RxGRDBiOS \
+	  -workspace ReactiveGRDB.xcworkspace \
+	  -scheme ReactiveGRDBiOS \
 	  -destination $(MAX_IOS_DESTINATION) \
 	  SWIFT_VERSION=$(MIN_SWIFT_VERSION) \
 	  $(TEST_ACTIONS) \

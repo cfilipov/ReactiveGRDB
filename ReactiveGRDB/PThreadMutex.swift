@@ -1,3 +1,5 @@
+import Foundation
+
 final public class PThreadMutex {
     private var mutex = pthread_mutex_t()
     

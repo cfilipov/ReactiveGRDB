@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "560F92C21E94DF280077EADF"
-               BuildableName = "RxGRDB.framework"
-               BlueprintName = "RxGRDBmacOS"
-               ReferencedContainer = "container:RxGRDB.xcodeproj">
+               BlueprintIdentifier = "56E1F9781F8101EE00793BFA"
+               BuildableName = "ReactiveGRDBDemo.app"
+               BlueprintName = "ReactiveGRDBDemo"
+               ReferencedContainer = "container:ReactiveGRDBDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,24 +28,14 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "562755D61E962BFD0035B653"
-               BuildableName = "RxGRDBmacOSTests.xctest"
-               BlueprintName = "RxGRDBmacOSTests"
-               ReferencedContainer = "container:RxGRDB.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "560F92C21E94DF280077EADF"
-            BuildableName = "RxGRDB.framework"
-            BlueprintName = "RxGRDBmacOS"
-            ReferencedContainer = "container:RxGRDB.xcodeproj">
+            BlueprintIdentifier = "56E1F9781F8101EE00793BFA"
+            BuildableName = "ReactiveGRDBDemo.app"
+            BlueprintName = "ReactiveGRDBDemo"
+            ReferencedContainer = "container:ReactiveGRDBDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -61,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "560F92C21E94DF280077EADF"
-            BuildableName = "RxGRDB.framework"
-            BlueprintName = "RxGRDBmacOS"
-            ReferencedContainer = "container:RxGRDB.xcodeproj">
+            BlueprintIdentifier = "56E1F9781F8101EE00793BFA"
+            BuildableName = "ReactiveGRDBDemo.app"
+            BlueprintName = "ReactiveGRDBDemo"
+            ReferencedContainer = "container:ReactiveGRDBDemo.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -79,15 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "560F92C21E94DF280077EADF"
-            BuildableName = "RxGRDB.framework"
-            BlueprintName = "RxGRDBmacOS"
-            ReferencedContainer = "container:RxGRDB.xcodeproj">
+            BlueprintIdentifier = "56E1F9781F8101EE00793BFA"
+            BuildableName = "ReactiveGRDBDemo.app"
+            BlueprintName = "ReactiveGRDBDemo"
+            ReferencedContainer = "container:ReactiveGRDBDemo.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

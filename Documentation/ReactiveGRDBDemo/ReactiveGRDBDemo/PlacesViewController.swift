@@ -1,7 +1,7 @@
 import UIKit
 import MapKit
 import GRDB
-import RxGRDB
+import ReactiveGRDB
 import RxSwift
 
 class PlacesViewController: UIViewController {

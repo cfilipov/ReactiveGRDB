@@ -1,34 +1,34 @@
 use_frameworks!
-workspace 'RxGRDB.xcworkspace'
+workspace 'ReactiveGRDB.xcworkspace'
 
 def common
     pod 'RxSwift', '~> 4.0'
     pod 'GRDB.swift', '~> 3.3.0'
 end
 
-target 'RxGRDBiOS' do
+target 'ReactiveGRDBiOS' do
   platform :ios, '8.0'
   common
 end
 
-target 'RxGRDBmacOS' do
+target 'ReactiveGRDBmacOS' do
   platform :macos, '10.10'
   common
 end
 
-target 'RxGRDBiOSTests' do
+target 'ReactiveGRDBiOSTests' do
   platform :ios, '8.0'
   common
 end
 
-target 'RxGRDBmacOSTests' do
+target 'ReactiveGRDBmacOSTests' do
   platform :macos, '10.10'
   common
 end
 
-target 'RxGRDBDemo' do
-  project 'Documentation/RxGRDBDemo/RxGRDBDemo.xcodeproj'
+target 'ReactiveGRDBDemo' do
+  project 'Documentation/ReactiveGRDBDemo/ReactiveGRDBDemo.xcodeproj'
   platform :ios, '8.0'
   pod 'Differ', '~> 1.0'
-  pod 'RxGRDB', :path => '.'
+  pod 'ReactiveGRDB', :path => '.'
 end

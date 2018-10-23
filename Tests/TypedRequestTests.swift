@@ -1,7 +1,7 @@
 import XCTest
 import GRDB
 import RxSwift
-@testable import RxGRDB // @testable to get PrimaryKeyDiff initializer
+@testable import ReactiveGRDB // @testable to get PrimaryKeyDiff initializer
 
 class TypedRequestTests : XCTestCase { }
 

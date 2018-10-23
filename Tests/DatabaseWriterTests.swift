@@ -1,7 +1,7 @@
 import XCTest
 import GRDB
 import RxSwift
-import RxGRDB
+import ReactiveGRDB
 
 class DatabaseWriterTests : XCTestCase { }
 

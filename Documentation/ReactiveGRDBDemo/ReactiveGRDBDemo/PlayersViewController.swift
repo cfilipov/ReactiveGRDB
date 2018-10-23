@@ -1,6 +1,6 @@
 import UIKit
 import RxSwift
-import RxGRDB
+import ReactiveGRDB
 import GRDB
 import Differ
 

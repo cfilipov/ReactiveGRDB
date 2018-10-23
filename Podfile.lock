@@ -1,10 +1,10 @@
 PODS:
   - Differ (1.2.3)
   - GRDB.swift (3.3.0)
-  - RxGRDB (0.11.0):
-    - RxGRDB/default (= 0.11.0)
+  - ReactiveGRDB (0.12.0):
+    - ReactiveGRDB/default (= 0.12.0)
     - RxSwift (~> 4.0)
-  - RxGRDB/default (0.11.0):
+  - ReactiveGRDB/default (0.12.0):
     - GRDB.swift (~> 3.3.0)
     - RxSwift (~> 4.0)
   - RxSwift (4.3.0)
@@ -12,7 +12,7 @@ PODS:
 DEPENDENCIES:
   - Differ (~> 1.0)
   - GRDB.swift (~> 3.3.0)
-  - RxGRDB (from `.`)
+  - ReactiveGRDB (from `.`)
   - RxSwift (~> 4.0)
 
 SPEC REPOS:
@@ -22,15 +22,15 @@ SPEC REPOS:
     - RxSwift
 
 EXTERNAL SOURCES:
-  RxGRDB:
+  ReactiveGRDB:
     :path: "."
 
 SPEC CHECKSUMS:
   Differ: 061f3298ea9408494c43b530c44583e555884daf
   GRDB.swift: 38e06d01606220169a91713c0e5a5046fab70bce
-  RxGRDB: 3446ed63a36378753963b94322a874fc7dd2d9ac
+  ReactiveGRDB: b8dda977178cf329d9a095b5c594911d53083b9c
   RxSwift: a9717a34df3179fe63563f76e046ad345078dd3a
 
-PODFILE CHECKSUM: 9de9eb2e2229995097879fd73226d9d7ed54014c
+PODFILE CHECKSUM: 73eee918bc5a0745caa56fa84c0106baa496c1a1
 
-COCOAPODS: 1.6.0.beta.1
+COCOAPODS: 1.5.3

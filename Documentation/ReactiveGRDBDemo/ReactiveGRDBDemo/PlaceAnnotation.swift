@@ -1,6 +1,6 @@
 import MapKit
 import GRDB
-import RxGRDB
+import ReactiveGRDB
 
 // A map annotation that wraps a place
 final class PlaceAnnotation: NSObject, MKAnnotation {

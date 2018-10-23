@@ -17,7 +17,7 @@
 		56E1F9871F8101EE00793BFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56E1F9851F8101EE00793BFA /* LaunchScreen.storyboard */; };
 		56E1F9941F81021300793BFA /* AppDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E1F9931F81021300793BFA /* AppDatabase.swift */; };
 		56E1F9961F81033200793BFA /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E1F9951F81033200793BFA /* Player.swift */; };
-		721E7FE4FB32DBD772EB3F53 /* Pods_RxGRDBDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC09FEC56643890A22E14D79 /* Pods_RxGRDBDemo.framework */; };
+		596E6F0937BC80109543D448 /* Pods_ReactiveGRDBDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04AB795AEE0DEA43782219A /* Pods_ReactiveGRDBDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,11 +34,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		322E774A7E3F8CCBF10E926B /* Pods-RxGRDBDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxGRDBDemo.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-RxGRDBDemo/Pods-RxGRDBDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		563BD2CD1F81363A006A5390 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		563BD2D01F81369D006A5390 /* PlaceAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAnnotation.swift; sourceTree = "<group>"; };
 		563BD2D21F81395F006A5390 /* PlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesViewController.swift; sourceTree = "<group>"; };
-		56E1F9791F8101EE00793BFA /* RxGRDBDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxGRDBDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		56E1F9791F8101EE00793BFA /* ReactiveGRDBDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactiveGRDBDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56E1F97C1F8101EE00793BFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56E1F97E1F8101EE00793BFA /* PlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
 		56E1F9811F8101EE00793BFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -47,8 +46,9 @@
 		56E1F9881F8101EE00793BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56E1F9931F81021300793BFA /* AppDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDatabase.swift; sourceTree = "<group>"; };
 		56E1F9951F81033200793BFA /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		7EF1D71A5F3F88A9E04D7B93 /* Pods-RxGRDBDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxGRDBDemo.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-RxGRDBDemo/Pods-RxGRDBDemo.release.xcconfig"; sourceTree = "<group>"; };
-		BC09FEC56643890A22E14D79 /* Pods_RxGRDBDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxGRDBDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A04AB795AEE0DEA43782219A /* Pods_ReactiveGRDBDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveGRDBDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9975F35686322169B1C949A /* Pods-ReactiveGRDBDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveGRDBDemo.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-ReactiveGRDBDemo/Pods-ReactiveGRDBDemo.release.xcconfig"; sourceTree = "<group>"; };
+		D4A22C9D6E6A590C66736DE1 /* Pods-ReactiveGRDBDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveGRDBDemo.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-ReactiveGRDBDemo/Pods-ReactiveGRDBDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				721E7FE4FB32DBD772EB3F53 /* Pods_RxGRDBDemo.framework in Frameworks */,
+				596E6F0937BC80109543D448 /* Pods_ReactiveGRDBDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +66,7 @@
 		56E1F9701F8101EE00793BFA = {
 			isa = PBXGroup;
 			children = (
-				56E1F97B1F8101EE00793BFA /* RxGRDBDemo */,
+				56E1F97B1F8101EE00793BFA /* ReactiveGRDBDemo */,
 				56E1F97A1F8101EE00793BFA /* Products */,
 				56E1F9A21F81083800793BFA /* Frameworks */,
 				8EA05AB27A11A09DA4413BE2 /* Pods */,
@@ -76,12 +76,12 @@
 		56E1F97A1F8101EE00793BFA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				56E1F9791F8101EE00793BFA /* RxGRDBDemo.app */,
+				56E1F9791F8101EE00793BFA /* ReactiveGRDBDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		56E1F97B1F8101EE00793BFA /* RxGRDBDemo */ = {
+		56E1F97B1F8101EE00793BFA /* ReactiveGRDBDemo */ = {
 			isa = PBXGroup;
 			children = (
 				56E1F9931F81021300793BFA /* AppDatabase.swift */,
@@ -96,13 +96,13 @@
 				56E1F9851F8101EE00793BFA /* LaunchScreen.storyboard */,
 				56E1F9881F8101EE00793BFA /* Info.plist */,
 			);
-			path = RxGRDBDemo;
+			path = ReactiveGRDBDemo;
 			sourceTree = "<group>";
 		};
 		56E1F9A21F81083800793BFA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BC09FEC56643890A22E14D79 /* Pods_RxGRDBDemo.framework */,
+				A04AB795AEE0DEA43782219A /* Pods_ReactiveGRDBDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -110,8 +110,8 @@
 		8EA05AB27A11A09DA4413BE2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				322E774A7E3F8CCBF10E926B /* Pods-RxGRDBDemo.debug.xcconfig */,
-				7EF1D71A5F3F88A9E04D7B93 /* Pods-RxGRDBDemo.release.xcconfig */,
+				D4A22C9D6E6A590C66736DE1 /* Pods-ReactiveGRDBDemo.debug.xcconfig */,
+				C9975F35686322169B1C949A /* Pods-ReactiveGRDBDemo.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -119,9 +119,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		56E1F9781F8101EE00793BFA /* RxGRDBDemo */ = {
+		56E1F9781F8101EE00793BFA /* ReactiveGRDBDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 56E1F98B1F8101EE00793BFA /* Build configuration list for PBXNativeTarget "RxGRDBDemo" */;
+			buildConfigurationList = 56E1F98B1F8101EE00793BFA /* Build configuration list for PBXNativeTarget "ReactiveGRDBDemo" */;
 			buildPhases = (
 				95963AD3C11B669F6A76FFF0 /* [CP] Check Pods Manifest.lock */,
 				56E1F9751F8101EE00793BFA /* Sources */,
@@ -134,9 +134,9 @@
 			);
 			dependencies = (
 			);
-			name = RxGRDBDemo;
+			name = ReactiveGRDBDemo;
 			productName = RxGRDBDemo;
-			productReference = 56E1F9791F8101EE00793BFA /* RxGRDBDemo.app */;
+			productReference = 56E1F9791F8101EE00793BFA /* ReactiveGRDBDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -155,7 +155,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 56E1F9741F8101EE00793BFA /* Build configuration list for PBXProject "RxGRDBDemo" */;
+			buildConfigurationList = 56E1F9741F8101EE00793BFA /* Build configuration list for PBXProject "ReactiveGRDBDemo" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -168,7 +168,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				56E1F9781F8101EE00793BFA /* RxGRDBDemo */,
+				56E1F9781F8101EE00793BFA /* ReactiveGRDBDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -198,7 +198,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RxGRDBDemo-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ReactiveGRDBDemo-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -211,22 +211,20 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RxGRDBDemo/Pods-RxGRDBDemo-frameworks.sh",
+				"${SRCROOT}/../../Pods/Target Support Files/Pods-ReactiveGRDBDemo/Pods-ReactiveGRDBDemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GRDB.swift-iOS/GRDB.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift-iOS/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Differ/Differ.framework",
-				"${BUILT_PRODUCTS_DIR}/RxGRDB/RxGRDB.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differ.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGRDB.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RxGRDBDemo/Pods-RxGRDBDemo-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/../../Pods/Target Support Files/Pods-ReactiveGRDBDemo/Pods-ReactiveGRDBDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -379,14 +377,14 @@
 		};
 		56E1F98C1F8101EE00793BFA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 322E774A7E3F8CCBF10E926B /* Pods-RxGRDBDemo.debug.xcconfig */;
+			baseConfigurationReference = D4A22C9D6E6A590C66736DE1 /* Pods-ReactiveGRDBDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AMD8W895CT;
-				INFOPLIST_FILE = RxGRDBDemo/Info.plist;
+				DEVELOPMENT_TEAM = 9HMMG3T4Z7;
+				INFOPLIST_FILE = ReactiveGRDBDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.groue.RxGRDBDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.groue.ReactiveGRDBDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -395,14 +393,14 @@
 		};
 		56E1F98D1F8101EE00793BFA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7EF1D71A5F3F88A9E04D7B93 /* Pods-RxGRDBDemo.release.xcconfig */;
+			baseConfigurationReference = C9975F35686322169B1C949A /* Pods-ReactiveGRDBDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AMD8W895CT;
-				INFOPLIST_FILE = RxGRDBDemo/Info.plist;
+				DEVELOPMENT_TEAM = 9HMMG3T4Z7;
+				INFOPLIST_FILE = ReactiveGRDBDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.groue.RxGRDBDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.groue.ReactiveGRDBDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -412,7 +410,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		56E1F9741F8101EE00793BFA /* Build configuration list for PBXProject "RxGRDBDemo" */ = {
+		56E1F9741F8101EE00793BFA /* Build configuration list for PBXProject "ReactiveGRDBDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				56E1F9891F8101EE00793BFA /* Debug */,
@@ -421,7 +419,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		56E1F98B1F8101EE00793BFA /* Build configuration list for PBXNativeTarget "RxGRDBDemo" */ = {
+		56E1F98B1F8101EE00793BFA /* Build configuration list for PBXNativeTarget "ReactiveGRDBDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				56E1F98C1F8101EE00793BFA /* Debug */,

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:Documentation/Playgrounds"
+      name = "Playgrounds">
+      <FileRef
+         location = "group:ReactiveGRDB.playground">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:/Users/cfilipov/Documents/GitHub/ReactiveGRDB/ReactiveGRDB.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Documentation/ReactiveGRDBDemo/ReactiveGRDBDemo.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Documentation/ReactiveGRDBDemo/ReactiveGRDBDemo.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:ReactiveGRDB.xcodeproj">
+   </FileRef>
+</Workspace>

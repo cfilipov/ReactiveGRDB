@@ -1,7 +1,7 @@
 import XCTest
 import GRDB
 import RxSwift
-@testable import RxGRDB
+@testable import ReactiveGRDB
 
 class RowValueTests: XCTestCase { }
 
