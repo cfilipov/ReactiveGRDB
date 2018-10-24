@@ -1,6 +1,6 @@
 import XCTest
 import GRDB
-import RxSwift
+import ReactiveKit
 @testable import ReactiveGRDB // @testable to get PrimaryKeyDiff initializer
 
 class TypedRequestTests : XCTestCase { }
@@ -58,14 +58,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<[Player]>(expectedEventCount: expectedNames.count)
-        request.rx.fetchAll(in: writer)
-            .subscribe { event in
+        let recorder = EventRecorder<[Player], AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchAll(in: writer)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -92,14 +92,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<[Player]>(expectedEventCount: expectedNames.count)
-        request.rx.fetchAll(in: writer, distinctUntilChanged: true)
-            .subscribe { event in
+        let recorder = EventRecorder<[Player], AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchAll(in: writer, distinctUntilChanged: true)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -126,14 +126,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<[Player]>(expectedEventCount: expectedNames.count)
-        request.rx.fetchAll(in: writer)
-            .subscribe { event in
+        let recorder = EventRecorder<[Player], AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchAll(in: writer)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -161,14 +161,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<Player?>(expectedEventCount: expectedNames.count)
-        request.rx.fetchOne(in: writer)
-            .subscribe { event in
+        let recorder = EventRecorder<Player?, AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchOne(in: writer)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -194,14 +194,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<Player?>(expectedEventCount: expectedNames.count)
-        request.rx.fetchOne(in: writer, distinctUntilChanged: true)
-            .subscribe { event in
+        let recorder = EventRecorder<Player?, AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchOne(in: writer, distinctUntilChanged: true)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -228,14 +228,14 @@ extension TypedRequestTests {
         ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<Player?>(expectedEventCount: expectedNames.count)
-        request.rx.fetchOne(in: writer)
-            .subscribe { event in
+        let recorder = EventRecorder<Player?, AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchOne(in: writer)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -265,14 +265,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<[Row]>(expectedEventCount: expectedNames.count)
-        request.rx.fetchAll(in: writer)
-            .subscribe { event in
+        let recorder = EventRecorder<[Row], AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchAll(in: writer)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -299,14 +299,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<[Row]>(expectedEventCount: expectedNames.count)
-        request.rx.fetchAll(in: writer, distinctUntilChanged: true)
-            .subscribe { event in
+        let recorder = EventRecorder<[Row], AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchAll(in: writer, distinctUntilChanged: true)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -333,14 +333,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<[Row]>(expectedEventCount: expectedNames.count)
-        request.rx.fetchAll(in: writer)
-            .subscribe { event in
+        let recorder = EventRecorder<[Row], AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchAll(in: writer)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -368,14 +368,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<Row?>(expectedEventCount: expectedNames.count)
-        request.rx.fetchOne(in: writer)
-            .subscribe { event in
+        let recorder = EventRecorder<Row?, AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchOne(in: writer)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -401,14 +401,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<Row?>(expectedEventCount: expectedNames.count)
-        request.rx.fetchOne(in: writer, distinctUntilChanged: true)
-            .subscribe { event in
+        let recorder = EventRecorder<Row?, AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchOne(in: writer, distinctUntilChanged: true)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -435,14 +435,14 @@ extension TypedRequestTests {
         ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<Row?>(expectedEventCount: expectedNames.count)
-        request.rx.fetchOne(in: writer)
-            .subscribe { event in
+        let recorder = EventRecorder<Row?, AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchOne(in: writer)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -472,14 +472,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<[String]>(expectedEventCount: expectedNames.count)
-        request.rx.fetchAll(in: writer)
-            .subscribe { event in
+        let recorder = EventRecorder<[String], AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchAll(in: writer)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -506,14 +506,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<[String]>(expectedEventCount: expectedNames.count)
-        request.rx.fetchAll(in: writer, distinctUntilChanged: true)
-            .subscribe { event in
+        let recorder = EventRecorder<[String], AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchAll(in: writer, distinctUntilChanged: true)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -541,14 +541,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<String?>(expectedEventCount: expectedNames.count)
-        request.rx.fetchOne(in: writer)
-            .subscribe { event in
+        let recorder = EventRecorder<String?, AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchOne(in: writer)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -574,14 +574,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<String?>(expectedEventCount: expectedNames.count)
-        request.rx.fetchOne(in: writer, distinctUntilChanged: true)
-            .subscribe { event in
+        let recorder = EventRecorder<String?, AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchOne(in: writer, distinctUntilChanged: true)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -611,14 +611,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<[String?]>(expectedEventCount: expectedNames.count)
-        request.rx.fetchAll(in: writer)
-            .subscribe { event in
+        let recorder = EventRecorder<[String?], AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchAll(in: writer)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -648,14 +648,14 @@ extension TypedRequestTests {
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<[String?]>(expectedEventCount: expectedNames.count)
-        request.rx.fetchAll(in: writer, distinctUntilChanged: true)
-            .subscribe { event in
+        let recorder = EventRecorder<[String?], AnyError>(expectedEventCount: expectedNames.count)
+        request.reactive.fetchAll(in: writer, distinctUntilChanged: true)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         
@@ -686,32 +686,32 @@ extension TypedRequestTests {
                     ],
                 updated: [],
                 deleted: []),
-            PrimaryKeyDiff(
-                inserted: [],
-                updated: [],
-                deleted: []),
-            PrimaryKeyDiff(
-                inserted: [],
-                updated: [Player(id: 2, name: "Barbie", email: nil)],
-                deleted: []),
-            PrimaryKeyDiff(
-                inserted: [],
-                updated: [],
-                deleted: [
-                    Player(id: 1, name: "Arthur", email: "arthur@example.com"),
-                    Player(id: 2, name: "Barbie", email: nil)]),
-            PrimaryKeyDiff(
-                inserted: [
-                    Player(id: 1, name: "Craig", email: nil),
-                    Player(id: 2, name: "David", email: "david@example.com"),
-                    Player(id: 3, name: "Elena", email: "elena@example.com"),
-                    ],
-                updated: [],
-                deleted: []),
+//            PrimaryKeyDiff(
+//                inserted: [],
+//                updated: [],
+//                deleted: []),
+//            PrimaryKeyDiff(
+//                inserted: [],
+//                updated: [Player(id: 2, name: "Barbie", email: nil)],
+//                deleted: []),
+//            PrimaryKeyDiff(
+//                inserted: [],
+//                updated: [],
+//                deleted: [
+//                    Player(id: 1, name: "Arthur", email: "arthur@example.com"),
+//                    Player(id: 2, name: "Barbie", email: nil)]),
+//            PrimaryKeyDiff(
+//                inserted: [
+//                    Player(id: 1, name: "Craig", email: nil),
+//                    Player(id: 2, name: "David", email: "david@example.com"),
+//                    Player(id: 3, name: "Elena", email: "elena@example.com"),
+//                    ],
+//                updated: [],
+//                deleted: []),
             ]
         
         try setUpDatabase(in: writer)
-        let recorder = EventRecorder<PrimaryKeyDiff<Player>>(expectedEventCount: expectedDiffs.count)
+        let recorder = EventRecorder<PrimaryKeyDiff<Player>, AnyError>(expectedEventCount: expectedDiffs.count)
         
         let diffScanner = try writer.read { db in
             try PrimaryKeyDiffScanner(
@@ -721,12 +721,12 @@ extension TypedRequestTests {
         }
         request
             .asRequest(of: Row.self)
-            .rx
+            .reactive
             .fetchAll(in: writer)
             .scan(diffScanner) { (diffScanner, rows) in diffScanner.diffed(from: rows) }
             .map { $0.diff }
-            .subscribe(recorder)
-            .disposed(by: disposeBag)
+            .observe(with: recorder)
+            .dispose(in: disposeBag)
         try modifyDatabase(in: writer)
         wait(for: recorder, timeout: 1)
         

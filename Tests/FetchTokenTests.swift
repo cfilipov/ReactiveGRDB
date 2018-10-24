@@ -1,6 +1,6 @@
 import XCTest
 import GRDB
-import RxSwift
+import ReactiveKit
 import ReactiveGRDB
 
 class FetchTokenTests : XCTestCase { }
@@ -29,22 +29,22 @@ extension FetchTokenTests {
             (["foo", "bar"], 1),
             ([], 2)
         ]
-        let recorder = EventRecorder<([String], Int)>(expectedEventCount: expectedValues.count)
+        let recorder = EventRecorder<([String], Int), AnyError>(expectedEventCount: expectedValues.count)
         let request = SQLRequest<Row>("SELECT * FROM table1")
         
         // 1 (startImmediately parameter is true by default)
-        AnyDatabaseWriter(writer).rx
+        AnyDatabaseWriter(writer).reactive
             .fetch(from: [request]) { db -> ([String], Int) in
                 let strings = try String.fetchAll(db, "SELECT a FROM table1")
                 let int = try Int.fetchOne(db, "SELECT COUNT(*) FROM table2")!
                 return (strings, int)
             }
-            .subscribe { event in
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         
         try writer.writeWithoutTransaction { db in
             // 2: modify observed requests
@@ -87,24 +87,24 @@ extension FetchTokenTests {
         }
         
         let expectedValues: [Int] = [0, 1, 2]
-        let recorder = EventRecorder<Int>(expectedEventCount: expectedValues.count)
+        let recorder = EventRecorder<Int, AnyError>(expectedEventCount: expectedValues.count)
         let request = SQLRequest<Int>("SELECT COUNT(*) FROM t")
         
         let initialFetchExpectation = expectation(description: "initial fetch")
         initialFetchExpectation.assertForOverFulfill = false
 
         DispatchQueue.global().async {
-            AnyDatabaseWriter(writer).rx
+            AnyDatabaseWriter(writer).reactive
                 .fetch(from: [request]) { db -> Int in
                     initialFetchExpectation.fulfill()
                     return try request.fetchOne(db)!
                 }
-                .subscribe { event in
+                .observe { event in
                     // events are expected on the main thread by default
                     assertMainQueue()
                     recorder.on(event)
                 }
-                .disposed(by: disposeBag)
+                .dispose(in: disposeBag)
         }
         
         // wait until we have fetched initial value before we perform database changes
@@ -139,7 +139,7 @@ extension FetchTokenTests {
         
         var disposable: Disposable? {
             willSet { disposable?.dispose() }
-            didSet { disposable?.disposed(by: disposeBag) }
+            didSet { disposable?.dispose(in: disposeBag) }
         }
         
         let request = SQLRequest<Int>("SELECT COUNT(*) FROM t")
@@ -147,13 +147,13 @@ extension FetchTokenTests {
         let expectation1 = expectation(description: "1st subscription")
         expectation1.expectedFulfillmentCount = 2
         var count1: Int? = nil
-        request.rx.fetchOne(in: writer)
-            .subscribe(onNext: {
+        request.reactive.fetchOne(in: writer)
+            .observeNext {
                 XCTAssertTrue(Thread.isMainThread)
                 expectation1.fulfill()
                 count1 = $0
-            })
-            .disposed(by: disposeBag)
+            }
+            .dispose(in: disposeBag)
         XCTAssertEqual(count1, 0) // synchronous emission of the 1st event
 
         try writer.write { db in
@@ -161,12 +161,12 @@ extension FetchTokenTests {
         }
         
         var count2: Int? = nil
-        request.rx.fetchOne(in: writer)
-            .subscribe(onNext: {
+        request.reactive.fetchOne(in: writer)
+            .observeNext {
                 XCTAssertTrue(Thread.isMainThread)
                 count2 = $0
-            })
-            .disposed(by: disposeBag)
+            }
+            .dispose(in: disposeBag)
         XCTAssertEqual(count2, 1) // synchronous emission of the 1st event
         
         waitForExpectations(timeout: 1, handler: nil)

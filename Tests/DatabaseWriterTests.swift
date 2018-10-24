@@ -1,6 +1,6 @@
 import XCTest
 import GRDB
-import RxSwift
+import ReactiveKit
 import ReactiveGRDB
 
 class DatabaseWriterTests : XCTestCase { }
@@ -33,14 +33,14 @@ extension DatabaseWriterTests {
             SQLRequest("SELECT a FROM table1"),
             SQLRequest("SELECT table1.a, table2.b FROM table1, table2")]
         
-        let recorder = EventRecorder<Void>(expectedEventCount: 5)
+        let recorder = EventRecorder<Void, AnyError>(expectedEventCount: 5)
         
         // 1 (startImmediately parameter is true by default)
-        AnyDatabaseWriter(writer).rx // ReactiveCompatible is unavailable: use AnyDatabaseWriter to get .rx
+        AnyDatabaseWriter(writer).reactive // ReactiveCompatible is unavailable: use AnyDatabaseWriter to get .rx
             .changes(in: requests)
             .map { _ in }
-            .subscribe(recorder)
-            .disposed(by: disposeBag)
+            .observe(with: recorder)
+            .dispose(in: disposeBag)
         
         try writer.writeWithoutTransaction { db in
             // 2 (modify both requests)
@@ -91,14 +91,14 @@ extension DatabaseWriterTests {
             }
         }
         
-        let recorder = EventRecorder<Void>(expectedEventCount: 4)
+        let recorder = EventRecorder<Void, AnyError>(expectedEventCount: 4)
         
         // 1
-        AnyDatabaseWriter(writer).rx // ReactiveCompatible is unavailable: use AnyDatabaseWriter to get .rx
+        AnyDatabaseWriter(writer).reactive // ReactiveCompatible is unavailable: use AnyDatabaseWriter to get .rx
             .changes(in: [DatabaseRegion.fullDatabase])
             .map { _ in }
-            .subscribe(recorder)
-            .disposed(by: disposeBag)
+            .observe(with: recorder)
+            .dispose(in: disposeBag)
         
         try writer.writeWithoutTransaction { db in
             // 2

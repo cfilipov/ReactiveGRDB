@@ -1,5 +1,5 @@
 import XCTest
-import RxSwift
+import ReactiveKit
 import GRDB
 
 class Test {
@@ -14,7 +14,7 @@ class Test {
         // Create temp directory
         let fm = FileManager.default
         let directoryURL = URL(fileURLWithPath: NSTemporaryDirectory())
-            .appendingPathComponent("RxGRDBTests", isDirectory: true)
+            .appendingPathComponent("ReactiveGRDBTests", isDirectory: true)
             .appendingPathComponent(ProcessInfo.processInfo.globallyUniqueString, isDirectory: true)
         try fm.createDirectory(at: directoryURL, withIntermediateDirectories: true, attributes: nil)
         
@@ -31,9 +31,9 @@ class Test {
     }
 }
 
-class EventRecorder<E> : ObserverType {
+class EventRecorder<Element, Error: Swift.Error> : ObserverProtocol {
     fileprivate let expectation: XCTestExpectation
-    private(set) var recordedEvents: [Event<E>] = []
+    private(set) var recordedEvents: [Event<Element, Error>] = []
     
     init(expectedEventCount: Int, description: String = "") {
         expectation = XCTestExpectation(description: description)
@@ -41,14 +41,14 @@ class EventRecorder<E> : ObserverType {
         expectation.assertForOverFulfill = true
     }
     
-    func on(_ event: Event<E>) {
+    func on(_ event: Event<Element, Error>) {
         recordedEvents.append(event)
         expectation.fulfill()
     }
 }
 
 extension XCTestCase {
-    func wait<E>(for recorder: EventRecorder<E>, timeout seconds: TimeInterval) {
+    func wait<Element, Error: Swift.Error>(for recorder: EventRecorder<Element, Error>, timeout seconds: TimeInterval) {
         wait(for: [recorder.expectation], timeout: seconds)
     }
 }

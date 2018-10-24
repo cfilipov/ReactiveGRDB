@@ -2,7 +2,7 @@ import UIKit
 import MapKit
 import GRDB
 import ReactiveGRDB
-import RxSwift
+import ReactiveKit
 
 class PlacesViewController: UIViewController {
     private let disposeBag = DisposeBag()

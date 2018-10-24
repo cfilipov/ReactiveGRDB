@@ -3,7 +3,7 @@
 #else
     import GRDB
 #endif
-import RxSwift
+import ReactiveKit
 
 public protocol DatabaseRegionConvertible {
     /// Returns a database region.
@@ -67,9 +67,9 @@ extension Reactive where Base: DatabaseRegionConvertible {
     public func changes(
         in writer: DatabaseWriter,
         startImmediately: Bool = true)
-        -> Observable<Database>
+        -> Signal<Database, AnyError>
     {
-        return AnyDatabaseWriter(writer).rx.changes(
+        return AnyDatabaseWriter(writer).reactive.changes(
             in: [base],
             startImmediately: startImmediately)
     }
@@ -122,13 +122,13 @@ extension Reactive where Base: DatabaseWriter {
     public func changes(
         in regions: [DatabaseRegionConvertible],
         startImmediately: Bool = true)
-        -> Observable<Database>
+        -> Signal<Database, AnyError>
     {
         return ChangesObservable(
             writer: base,
             startImmediately: startImmediately,
             observedRegion: { db in try regions.map { try $0.databaseRegion(db) }.union() })
-            .asObservable()
+            .toSignal()
     }
     
     /// Returns an Observable that emits values after each committed
@@ -187,22 +187,22 @@ extension Reactive where Base: DatabaseWriter {
     public func fetch<T>(
         from regions: [DatabaseRegionConvertible],
         startImmediately: Bool = true,
-        scheduler: ImmediateSchedulerType? = nil,
+        context: ExecutionContext? = nil,
         values: @escaping (Database) throws -> T)
-        -> Observable<T>
+        -> Signal<T, AnyError>
     {
-        let fetchTokenScheduler: FetchTokenScheduler
-        if let scheduler = scheduler {
-            fetchTokenScheduler = .scheduler(scheduler)
+        let fetchTokenExecutionContext: FetchTokenExecutionContext
+        if let context = context {
+            fetchTokenExecutionContext = .context(context)
         } else {
-            fetchTokenScheduler = .mainQueue
+            fetchTokenExecutionContext = .mainQueue
         }
         return FetchTokensObservable(
             writer: base,
             startImmediately: startImmediately,
-            scheduler: fetchTokenScheduler,
+            scheduler: fetchTokenExecutionContext,
             observedRegion: { db in try regions.map { try $0.databaseRegion(db) }.union() })
-            .asObservable()
+            .toSignal()
             .mapFetch(values)
     }
 }

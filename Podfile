@@ -2,7 +2,7 @@ use_frameworks!
 workspace 'ReactiveGRDB.xcworkspace'
 
 def common
-    pod 'RxSwift', '~> 4.0'
+    pod 'ReactiveKit'
     pod 'GRDB.swift', '~> 3.3.0'
 end
 

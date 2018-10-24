@@ -1,18 +1,15 @@
-import RxSwift
+import ReactiveKit
 
-enum Result<Value> {
-    case success(Value)
-    case failure(Error)
-    
-    public init(value: () throws -> Value) {
+public extension Result {
+    public init(value: () throws -> T) {
         do {
             self = try .success(value())
         } catch {
-            self = .failure(error)
+            self = .failure(error as! E)
         }
     }
-    
-    func map<T>(_ transform: (Value) -> T) -> Result<T> {
+
+    public func map<V>(_ transform: (T) -> V) -> Result<V, E> {
         switch self {
         case .success(let value):
             return .success(transform(value))
@@ -22,13 +19,13 @@ enum Result<Value> {
     }
 }
 
-extension ObserverType {
-    func onResult(_ result: Result<E>) {
+extension ObserverProtocol {
+    func onResult(_ result: Result<Element, Error>) {
         switch result {
         case .success(let element):
-            onNext(element)
+            next(element)
         case .failure(let error):
-            onError(error)
+            failed(error)
         }
     }
 }

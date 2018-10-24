@@ -1,6 +1,6 @@
 import XCTest
 import GRDB
-import RxSwift
+import ReactiveKit
 import ReactiveGRDB
 
 class RequestTests : XCTestCase { }
@@ -36,12 +36,12 @@ extension RequestTests {
         
         var changes = requests.map { _ in false }
         for (index, request) in requests.enumerated() {
-            request.rx
+            request.reactive
                 .changes(in: writer)
-                .subscribe(onNext: { _ in
+                .observeNext { _ in
                     changes[index] = true
-                })
-                .disposed(by: disposeBag)
+                }
+                .dispose(in: disposeBag)
         }
 
         // Subscription immediately triggers an event
@@ -160,17 +160,17 @@ extension RequestTests {
         }
         
         let expectedCounts = [2, 2, 0, 3]
-        let recorder = EventRecorder<Int>(expectedEventCount: expectedCounts.count)
+        let recorder = EventRecorder<Int, AnyError>(expectedEventCount: expectedCounts.count)
         
         struct Person : TableRecord { static let databaseTableName = "persons" }
         let request = Person.all()
-        request.rx.fetchCount(in: writer)
-            .subscribe { event in
+        request.reactive.fetchCount(in: writer)
+            .observe { event in
                 // events are expected on the main thread by default
                 assertMainQueue()
                 recorder.on(event)
             }
-            .disposed(by: disposeBag)
+            .dispose(in: disposeBag)
         try writer.writeWithoutTransaction { db in
             try db.execute("UPDATE persons SET name = name")
             try db.execute("DELETE FROM persons")
@@ -212,21 +212,23 @@ extension RequestTests {
         let request = Record.all()
         var eventsCount = 0
         var needsThrow = false
-        request.rx
+        request.reactive
             .fetchCount(in: writer)
-            .map { db in
+            .flatMapLatest { value -> Signal<Int, AnyError> in
                 if needsThrow {
                     needsThrow = false
-                    throw NSError(domain: "RxGRDB", code: 0)
+                    return Signal.failed(AnyError(NSError(domain: "ReactiveGRDB", code: 0)))
+                } else {
+                    return Signal.just(value).ignoreTerminal()
                 }
             }
-            .retry()
-            .subscribe(onNext: {
+            .retry(times: 5) // TODO: Revisit this
+            .observeNext { _ in
                 eventsCount += 1
                 expectation.fulfill()
-            })
-            .disposed(by: disposeBag)
-        
+            }
+            .dispose(in: disposeBag)
+
         XCTAssertEqual(eventsCount, 1)
         
         needsThrow = true

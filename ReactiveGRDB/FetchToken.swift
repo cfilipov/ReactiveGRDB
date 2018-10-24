@@ -3,7 +3,7 @@
 #else
     import GRDB
 #endif
-import RxSwift
+import ReactiveKit
 
 /// Fetch tokens let you turn notifications of database changes into
 /// fetched values.
@@ -30,16 +30,16 @@ struct FetchToken {
         case subscription
         
         /// Emitted from the database writer dispatch queue.
-        case change(DatabaseWriter, FetchTokenScheduler)
+        case change(DatabaseWriter, FetchTokenExecutionContext)
     }
     
     var kind: Kind
 }
 
 /// How fetched values should be scheduled
-enum FetchTokenScheduler {
+enum FetchTokenExecutionContext {
     /// Schedules with an RxSwift scheduler
-    case scheduler(ImmediateSchedulerType)
+    case context(ExecutionContext)
     
     /// Schedules on the main queue. This specific scheduling technique
     /// guarantees that the initially fetched values are synchronous delivered
@@ -49,10 +49,9 @@ enum FetchTokenScheduler {
     
     func schedule(action: @escaping () -> Void) {
         switch self {
-        case .scheduler(let scheduler):
-            _ = scheduler.schedule(()) { _ in
+        case .context(let context):
+            context.execute {
                 action()
-                return Disposables.create()
             }
         case .mainQueue:
             if DispatchQueue.isMain {
@@ -76,16 +75,16 @@ extension DispatchQueue {
     }
 }
 
-extension ObservableType where E == FetchToken {
+extension SignalProtocol where Element == FetchToken {
     /// Transforms a sequence of fetch tokens into a sequence of fetched values.
     ///
     /// - parameter fetch: A function that accepts a database connection and
     ///   returns fetched value.
-    /// - returns: An observable sequence whose elements are the fetched values.
-    func mapFetch<R>(_ fetch: @escaping (Database) throws -> R) -> Observable<R> {
+    /// - returns: An signal sequence whose elements are the fetched values.
+    func mapFetch<R>(_ fetch: @escaping (Database) throws -> R) -> Signal<R, Error> {
         return MapFetch(
-            source: asObservable(),
+            source: toSignal(),
             fetch: fetch)
-            .asObservable()
+            .toSignal()
     }
 }

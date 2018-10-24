@@ -51,6 +51,7 @@
 		56DBA5431F0BF12B00C90A18 /* GRDB+Reactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DBA5411F0BF12B00C90A18 /* GRDB+Reactive.swift */; };
 		72A37CF569B8FC9AF9E931FB /* Pods_ReactiveGRDBiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 647B62001E8A2F526B5F5CB2 /* Pods_ReactiveGRDBiOS.framework */; };
 		978F0677F9FF787583972EA3 /* Pods_ReactiveGRDBmacOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5441390EDCB271E32F075EDC /* Pods_ReactiveGRDBmacOSTests.framework */; };
+		B2790B72217FF0B900921165 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2790B71217FF0B900921165 /* Error.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		643678EF8228D5BE8C109ADA /* Pods-ReactiveGRDBiOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveGRDBiOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveGRDBiOSTests/Pods-ReactiveGRDBiOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		647B62001E8A2F526B5F5CB2 /* Pods_ReactiveGRDBiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveGRDBiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A571B6226B81D5AB0D859883 /* Pods-ReactiveGRDBiOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveGRDBiOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveGRDBiOSTests/Pods-ReactiveGRDBiOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B2790B71217FF0B900921165 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		B9F545C3AA881D1F6C21FB24 /* Pods_ReactiveGRDBmacOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveGRDBmacOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBB8D146D8D6C93C8AE2589C /* Pods-ReactiveGRDBmacOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveGRDBmacOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveGRDBmacOSTests/Pods-ReactiveGRDBmacOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D92BF42C9C10992B98C7FCAD /* Pods-ReactiveGRDBiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveGRDBiOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveGRDBiOS/Pods-ReactiveGRDBiOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 			children = (
 				564E73AD203C99A7000C443C /* PThreadMutex.swift */,
 				562756571E963C1B0035B653 /* Result.swift */,
+				B2790B71217FF0B900921165 /* Error.swift */,
 			);
 			name = Lib;
 			sourceTree = "<group>";
@@ -478,12 +481,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveGRDBiOSTests/Pods-ReactiveGRDBiOSTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GRDB.swift-iOS/GRDB.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift-iOS/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveKit-iOS/ReactiveKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRDB.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -534,12 +537,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveGRDBmacOSTests/Pods-ReactiveGRDBmacOSTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GRDB.swift-macOS/GRDB.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift-macOS/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveKit-macOS/ReactiveKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRDB.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -606,6 +609,7 @@
 				56DBA52F1F0BB02200C90A18 /* MapFetch.swift in Sources */,
 				562756581E963C1B0035B653 /* Result.swift in Sources */,
 				5617825D1F6566EA00CEAA55 /* PrimaryKeyDiffScanner.swift in Sources */,
+				B2790B72217FF0B900921165 /* Error.swift in Sources */,
 				561782571F655DAC00CEAA55 /* DiffSupport.swift in Sources */,
 				5653EC23209C36FD00F46237 /* DatabaseRegionConvertible.swift in Sources */,
 				569E8511200A695A0028D1EC /* ChangesObservable.swift in Sources */,

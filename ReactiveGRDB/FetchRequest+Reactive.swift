@@ -4,7 +4,7 @@ import Foundation
 #else
     import GRDB
 #endif
-import RxSwift
+import ReactiveKit
 
 // MARK: - Count
 
@@ -56,12 +56,12 @@ extension Reactive where Base: FetchRequest & DatabaseRegionConvertible {
     public func fetchCount(
         in writer: DatabaseWriter,
         startImmediately: Bool = true,
-        scheduler: ImmediateSchedulerType? = nil)
-        -> Observable<Int>
+        context: ExecutionContext? = nil)
+        -> Signal<Int, AnyError>
     {
         let request = base
-        return AnyDatabaseWriter(writer).rx
-            .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+        return AnyDatabaseWriter(writer).reactive
+            .fetch(from: [request], startImmediately: startImmediately, context: context) {
                 try request.fetchCount($0)
         }
     }
@@ -116,21 +116,21 @@ extension Reactive where Base: FetchRequest & DatabaseRegionConvertible, Base.Ro
     public func fetchAll(
         in writer: DatabaseWriter,
         startImmediately: Bool = true,
-        scheduler: ImmediateSchedulerType? = nil,
+        context: ExecutionContext? = nil,
         distinctUntilChanged: Bool = false)
-        -> Observable<[Base.RowDecoder]>
+        -> Signal<[Base.RowDecoder], AnyError>
     {
         let request = base
         if distinctUntilChanged {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try Row.fetchAll($0, request)
                 }
-                .distinctUntilChanged(==)
+                .distinct()
                 .map { (rows: [Row]) in rows.map(Base.RowDecoder.init) }
         } else {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try request.fetchAll($0)
             }
         }
@@ -182,21 +182,21 @@ extension Reactive where Base: FetchRequest & DatabaseRegionConvertible, Base.Ro
     public func fetchOne(
         in writer: DatabaseWriter,
         startImmediately: Bool = true,
-        scheduler: ImmediateSchedulerType? = nil,
+        context: ExecutionContext? = nil,
         distinctUntilChanged: Bool = false)
-        -> Observable<Base.RowDecoder?>
+        -> Signal<Base.RowDecoder?, AnyError>
     {
         let request = base
         if distinctUntilChanged {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try Row.fetchOne($0, request)
                 }
-                .distinctUntilChanged(==)
+                .distinct()
                 .map { (row: Row?) in row.map(Base.RowDecoder.init) }
         } else {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try request.fetchOne($0)
             }
         }
@@ -252,20 +252,20 @@ extension Reactive where Base: FetchRequest & DatabaseRegionConvertible, Base.Ro
     public func fetchAll(
         in writer: DatabaseWriter,
         startImmediately: Bool = true,
-        scheduler: ImmediateSchedulerType? = nil,
+        context: ExecutionContext? = nil,
         distinctUntilChanged: Bool = false)
-        -> Observable<[Row]>
+        -> Signal<[Row], AnyError>
     {
         let request = base
         if distinctUntilChanged {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try request.fetchAll($0)
                 }
-                .distinctUntilChanged(==)
+                .distinct()
         } else {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try request.fetchAll($0)
             }
         }
@@ -317,20 +317,20 @@ extension Reactive where Base: FetchRequest & DatabaseRegionConvertible, Base.Ro
     public func fetchOne(
         in writer: DatabaseWriter,
         startImmediately: Bool = true,
-        scheduler: ImmediateSchedulerType? = nil,
+        context: ExecutionContext? = nil,
         distinctUntilChanged: Bool = false)
-        -> Observable<Row?>
+        -> Signal<Row?, AnyError>
     {
         let request = base
         if distinctUntilChanged {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try request.fetchOne($0)
                 }
-                .distinctUntilChanged(==)
+                .distinct()
         } else {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try request.fetchOne($0)
             }
         }
@@ -386,21 +386,21 @@ extension Reactive where Base: FetchRequest & DatabaseRegionConvertible, Base.Ro
     public func fetchAll(
         in writer: DatabaseWriter,
         startImmediately: Bool = true,
-        scheduler: ImmediateSchedulerType? = nil,
+        context: ExecutionContext? = nil,
         distinctUntilChanged: Bool = false)
-        -> Observable<[Base.RowDecoder]>
+        -> Signal<[Base.RowDecoder], AnyError>
     {
         let request = base
         if distinctUntilChanged {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try DatabaseValue.fetchAll($0, request)
                 }
-                .distinctUntilChanged(==)
+                .distinct()
                 .map { (dbValues: [DatabaseValue]) in dbValues.map { $0.losslessConvert() as Base.RowDecoder } }
         } else {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try request.fetchAll($0)
             }
         }
@@ -452,21 +452,21 @@ extension Reactive where Base: FetchRequest & DatabaseRegionConvertible, Base.Ro
     public func fetchOne(
         in writer: DatabaseWriter,
         startImmediately: Bool = true,
-        scheduler: ImmediateSchedulerType? = nil,
+        context: ExecutionContext? = nil,
         distinctUntilChanged: Bool = false)
-        -> Observable<Base.RowDecoder?>
+        -> Signal<Base.RowDecoder?, AnyError>
     {
         let request = base
         if distinctUntilChanged {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try DatabaseValue.fetchOne($0, request)
                 }
-                .distinctUntilChanged(==)
+                .distinct()
                 .map { (dbValue: DatabaseValue?) in dbValue.map { $0.losslessConvert() as Base.RowDecoder? } ?? nil }
         } else {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try request.fetchOne($0)
             }
         }
@@ -530,21 +530,21 @@ extension Reactive where Base: FetchRequest & DatabaseRegionConvertible, Base.Ro
     public func fetchAll(
         in writer: DatabaseWriter,
         startImmediately: Bool = true,
-        scheduler: ImmediateSchedulerType? = nil,
+        context: ExecutionContext? = nil,
         distinctUntilChanged: Bool = false)
-        -> Observable<[Base.RowDecoder._Wrapped?]>
+        -> Signal<[Base.RowDecoder._Wrapped?], AnyError>
     {
         let request = base
         if distinctUntilChanged {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try DatabaseValue.fetchAll($0, request)
                 }
-                .distinctUntilChanged(==)
+                .distinct()
                 .map { (dbValues: [DatabaseValue]) in dbValues.map { $0.losslessConvert() as Base.RowDecoder._Wrapped? } }
         } else {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try Optional<Base.RowDecoder._Wrapped>.fetchAll($0, request)
             }
         }
@@ -600,21 +600,21 @@ extension Reactive where Base: FetchRequest & DatabaseRegionConvertible, Base.Ro
     public func fetchAll(
         in writer: DatabaseWriter,
         startImmediately: Bool = true,
-        scheduler: ImmediateSchedulerType? = nil,
+        context: ExecutionContext? = nil,
         distinctUntilChanged: Bool = false)
-        -> Observable<[Base.RowDecoder]>
+        -> Signal<[Base.RowDecoder], AnyError>
     {
         let request = base
         if distinctUntilChanged {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try DatabaseValue.fetchAll($0, request)
                 }
-                .distinctUntilChanged(==)
+                .distinct()
                 .map { (dbValues: [DatabaseValue]) in dbValues.map { $0.losslessConvert() as Base.RowDecoder } }
         } else {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try request.fetchAll($0)
             }
         }
@@ -666,21 +666,21 @@ extension Reactive where Base: FetchRequest & DatabaseRegionConvertible, Base.Ro
     public func fetchOne(
         in writer: DatabaseWriter,
         startImmediately: Bool = true,
-        scheduler: ImmediateSchedulerType? = nil,
+        context: ExecutionContext? = nil,
         distinctUntilChanged: Bool = false)
-        -> Observable<Base.RowDecoder?>
+        -> Signal<Base.RowDecoder?, AnyError>
     {
         let request = base
         if distinctUntilChanged {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try DatabaseValue.fetchOne($0, request)
                 }
-                .distinctUntilChanged(==)
+                .distinct()
                 .map { (dbValue: DatabaseValue?) in dbValue.map { $0.losslessConvert() as Base.RowDecoder? } ?? nil }
         } else {
-            return AnyDatabaseWriter(writer).rx
-                .fetch(from: [request], startImmediately: startImmediately, scheduler: scheduler) {
+            return AnyDatabaseWriter(writer).reactive
+                .fetch(from: [request], startImmediately: startImmediately, context: context) {
                     try request.fetchOne($0)
             }
         }

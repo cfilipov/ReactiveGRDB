@@ -76,7 +76,7 @@ You can install RxGRDB with [CocoaPods](http://cocoapods.org/):
 3. In your application files, import the modules you need:
     
     ```swift
-    import RxSwift
+    import ReactiveKit
     import ReactiveGRDB
     import GRDB
     ```
@@ -95,7 +95,7 @@ In order to use databases encrypted with [SQLCipher](https://www.zetetic.net/sql
 3. In your application files, import the modules you need:
     
     ```swift
-    import RxSwift
+    import ReactiveKit
     import ReactiveGRDB
     import GRDBCipher
     ```

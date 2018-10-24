@@ -3,10 +3,11 @@
 #else
     import GRDB
 #endif
-import RxSwift
+import ReactiveKit
 
-final class ChangesObservable : ObservableType {
-    typealias E = Database
+final class ChangesObservable : SignalProtocol {
+    typealias Element = Database
+    typealias Error = AnyError
     let writer: DatabaseWriter
     let startImmediately: Bool
     let observedRegion: (Database) throws -> DatabaseRegion
@@ -26,32 +27,33 @@ final class ChangesObservable : ObservableType {
         self.startImmediately = startImmediately
         self.observedRegion = observedRegion
     }
-    
-    func subscribe<O>(_ observer: O) -> Disposable where O : ObserverType, O.E == Database {
+
+    func observe(with observer: @escaping (Event<Database, AnyError>) -> ()) -> Disposable {
         do {
             let writer = self.writer
-            
+
             let transactionObserver = try writer.unsafeReentrantWrite { db -> DatabaseRegionObserver in
                 if startImmediately {
-                    observer.onNext(db)
+                    observer(.next(db))
                 }
-                
+
                 let transactionObserver = try DatabaseRegionObserver(
                     observedRegion: observedRegion(db),
-                    onChange: { observer.onNext(db) })
+                    onChange: { observer(.next(db)) })
                 db.add(transactionObserver: transactionObserver)
                 return transactionObserver
             }
-            
-            return Disposables.create {
+
+            return BlockDisposable {
                 writer.unsafeReentrantWrite { db in
                     db.remove(transactionObserver: transactionObserver)
                 }
             }
         } catch {
-            observer.onError(error)
-            return Disposables.create()
+            observer(.failed(AnyError(error)))
+            return SimpleDisposable()
         }
     }
+
 }
 
